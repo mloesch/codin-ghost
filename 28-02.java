@@ -8,7 +8,7 @@ import java.math.*;
  **/
 class Player {
     public static Factory[] factories;
-    public static LinkedList<Integer[]> troops;
+    public static LinkedList<Troop> troops;
     
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
@@ -46,7 +46,7 @@ class Player {
                if (entityType.equals("FACTORY")){
                    factories[entityId].init(arg1, arg2, arg3);
                } else {
-                    troops.add (new Integer[]{entityId, arg1, arg2, arg3, arg4, arg5});
+                    troops.add (new Troop(entityId, arg1, arg2, arg3, arg4, arg5));
                }
             }
              
@@ -55,9 +55,9 @@ class Player {
                 {System.err.println("Factory "+j+":\n"+ factories[j]);}  //print out Factories
             
              System.err.println("Troops: ");
-             for (Integer[] k:troops)System.err.println(Arrays.toString(k));    //print out Troops
+             for (Troop t:troops)System.err.println(t);    //print out Troops
              
-             troops = new LinkedList<Integer[]>();
+             troops = new LinkedList<Troop>();
              
              System.out.println("WAIT");
         }
@@ -84,5 +84,23 @@ class Factory {
     }
     
     
+    
+}
+
+class Troop {
+    public int owner, id, factoryFrom, factoryTo, nrCyborgs, timeToArrival;
+    
+    public Troop (int id, int owner, int factoryFrom, int factoryTo, int nrCyborgs, int timeToArrival){
+        this.id=id;
+        this.factoryFrom=factoryFrom;
+        this.factoryTo=factoryTo;
+        this.nrCyborgs=nrCyborgs;
+        this.timeToArrival=timeToArrival;
+    }
+    
+    public String toString(){
+        return "ID: "+id+" Owner: "+owner+" From: "+factoryFrom+" To: "+factoryTo+" NrCyborgs: "+nrCyborgs+" Arrival: "+timeToArrival;
+        
+    }
     
 }
